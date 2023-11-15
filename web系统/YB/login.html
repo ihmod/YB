@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+</head>
+<style>
+    fieldset {
+        background-color: antiquewhite;
+    }
+</style>
+
+<body>
+        <fieldset>
+            <legend>登录:</legend>
+            <form action="/cgi-bin/login.py" method="post" >
+                账号:<input type="text" name="id"><br>
+                密码:<input type="password" name="pwd"><br><br>
+                <input type="submit" value="LOGIN" style="background-color: chartreuse;">
+            </form>
+        </fieldset>
+</body>
+
+</html>

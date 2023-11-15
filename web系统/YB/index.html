@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <title>管理员可见</title>
+</head>
+<body>
+    <style>
+        fieldset {
+            background-color: antiquewhite;
+        }
+    </style>
+    <div id="loginif"> </div>
+    <fieldset>
+        <legend>查询:</legend>
+        <form action="/cgi-bin/query.py" method="post" id="form1"
+            onsubmit="return sumbit_sure(this.getAttribute('id'))">
+            学号: <input type="text" pattern="[0-9]{12}" name="query" title="长度为12位的学号" required>
+            <input type="submit" value="QUERY" style="color: blue;">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>删除:</legend>
+        <form action="/cgi-bin/del.py" method="post" id="form2" onsubmit="return sumbit_sure(this.getAttribute('id'))">
+            学号: <input type="text" pattern="[0-9]{12}" name="delete" title="长度为12位的学号" required>
+            <input type="submit" value="DELETE" style="color: red;">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>续费:</legend>
+        <form action="/cgi-bin/renewal.py" method="post" id="form3"
+            onsubmit="return sumbit_sure(this.getAttribute('id'))">
+            学号: <input type="text" pattern="[0-9]{12}" title="长度为12位的学号" name="renewal" required><select name="types"
+                required>
+                <option value="1">永久</option>
+                <option value="2">包周</option>
+                <option value="3" selected="selected">包月</option>
+                <option value="4">单次</option>
+            </select>
+            <input type="submit" value="RENEWAL" style="color: purple;">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>新增:</legend>
+        <form action="/cgi-bin/add.py" method="post" id="form4" onsubmit="return sumbit_sure(this.getAttribute('id'))">
+            学号: <input type="text" pattern="[0-9]{12}" title="长度为12位的学号" name="add" required><br>
+            密码: <input type="password" pattern="Hnie@\d{5}[\d|X]" title="Hnie@身份证后六位" name="pwd" required> <br>
+            位置:
+            <textarea name="wz" cols="30" rows="10" max="80" required></textarea><br>
+            <!-- <select required>
+                <option value="湖南省 湘潭市 岳塘区 至善路 154号 靠近湖南工程学院(主校区)">明德4</option>
+                <option value="湖南省湘潭市岳塘区福星中路靠近靠近湖南工程学院(主校区)">明德9</option>
+                <option value="湖南省湘潭市岳塘区宝塔街道湖南工程学院(主校区)明德公寓10栋">明德10</option>
+            </select><br> -->
+            坐标: <input type="text" name="zb" max="20" required>&nbsp;&nbsp;<a href="./map.html" target="_blank"><i
+                    class="fa fa-map-marker" title="选取坐标"></i></a><br>
+            套餐: <select name="types" required>
+                <option value="1">永久</option>
+                <option value="2">包周</option>
+                <option value="3" selected="selected">包月</option>
+                <option value="4">单次</option>
+            </select><br><br>
+            <input type="submit" value="ADD" style="color: rgb(2, 228, 202);">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>日志</legend>
+        <iframe src="./YB.log" style="width: 100%;height: 300px;" frameborder="0"></iframe>
+    </fieldset>
+
+    <script>
+        window.onload = function () {
+            var xmlhttp;
+            var url = "/cgi-bin/load.py?t=" + Math.random()
+    
+            if (window.XMLHttpRequest) {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+    
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.responseText.indexOf("fail") >= 0) {
+                        window.location.href = "./login.html";
+                        document.getElementById('loginif').innerHTML = '未登录 无权进行任何操作，请返回登录重试！'
+                    }
+                    else {
+                        document.getElementById('loginif').innerHTML = xmlhttp.responseText
+                    }
+    
+                }
+    
+            }
+            xmlhttp.open("GET", url, false);
+            xmlhttp.send();
+        }
+    
+        function sumbit_sure(formid) {
+            // formid=obj.getAttribute('id')
+            var x = document.forms[formid]
+            var text = "";
+    
+            for (var i = 0; i < x.length - 1; i++) {
+                text += x.elements[i].value + "\n";
+            }
+            var gnl = confirm(text + "是否提交\n");
+            if (gnl == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
