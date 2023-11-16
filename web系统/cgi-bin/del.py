@@ -6,7 +6,8 @@ import http.cookies
 import os
 import sys
 import cgi
-import mysql.connector
+import mysql
+
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 form = cgi.FieldStorage()
 uname = form.getvalue('delete')

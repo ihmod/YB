@@ -67,7 +67,7 @@ def logdefine():
     stream_handler.setFormatter(formatter1)  # 输出格式
 
     # 保存日志文件，并自动分割器，按文件大小分割
-    rotating_file_handler = handlers.RotatingFileHandler(filename='D:\phpstudy_pro\WWW\YB\YB.log', mode='a', maxBytes=10 * 1024 * 1024,
+    rotating_file_handler = handlers.RotatingFileHandler(filename='./YB.log', mode='a', maxBytes=10 * 1024 * 1024,
                                                          backupCount=2, encoding='utf-8')
     rotating_file_handler.setLevel(logging.INFO)
     rotating_file_handler.setFormatter(formatter2)
@@ -183,9 +183,9 @@ def post(user, list1, list2, list3):
     return result
 
 def mail(user, mailmsg):
-    my_sender = '2306507479@qq.com'  # 发件人邮箱账号
-    my_pass = 'subtypozcgvadifi'  # 发件人邮箱密码
-    my_user = '519200882@qq.com'  # 收件人邮箱账号
+    my_sender = 'xx@qq.com'  # 发件人邮箱账号
+    my_pass = 'xxx'  # 发件人邮箱授权码
+    my_user = 'xx@qq.com'  # 收件人邮箱账号
 
     ret = True
     try:
